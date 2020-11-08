@@ -1,0 +1,54 @@
+{
+"skeleton": {
+	"hash": "PexVOQPGiGl9bPzINk8+LH8Cays",
+	"spine": "3.8.99",
+	"x": -59,
+	"y": -9.31,
+	"width": 66.45,
+	"height": 66.31,
+	"images": "./SecretMoonShards/Assets/SpineImages/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 47.13, "rotation": 0.92, "x": -27.84, "y": 24 }
+],
+"slots": [
+	{ "name": "MoonShard", "bone": "bone", "attachment": "MoonShard" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"MoonShard": {
+				"MoonShard": { "x": 2.06, "y": -0.18, "rotation": 131.14, "width": 46, "height": 48 }
+			}
+		}
+	}
+],
+"animations": {
+	"Shoot": {
+		"slots": {
+			"MoonShard": {
+				"attachment": [
+					{ "time": 0.8333, "name": "MoonShard" }
+				]
+			}
+		},
+		"bones": {
+			"bone": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "angle": 179.08, "curve": "stepped" },
+					{ "time": 0.8333, "angle": 179.08 }
+				],
+				"translate": [
+					{ "curve": 0.108, "c2": 0.23, "c3": 0.505 },
+					{ "time": 0.8333, "x": -163.4 }
+				]
+			}
+		}
+	},
+	"animation": {}
+}
+}
