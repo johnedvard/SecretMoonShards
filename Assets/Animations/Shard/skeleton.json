@@ -1,54 +1,108 @@
 {
 "skeleton": {
-	"hash": "PexVOQPGiGl9bPzINk8+LH8Cays",
+	"hash": "z2JVydhR8ojofrjo6JIK9qnfnKc",
 	"spine": "3.8.99",
-	"x": -59,
-	"y": -9.31,
-	"width": 66.45,
-	"height": 66.31,
+	"x": -3.23,
+	"y": -33.23,
+	"width": 66.47,
+	"height": 66.47,
 	"images": "./SecretMoonShards/Assets/SpineImages/",
 	"audio": ""
 },
 "bones": [
 	{ "name": "root" },
-	{ "name": "bone", "parent": "root", "length": 47.13, "rotation": 0.92, "x": -27.84, "y": 24 }
+	{ "name": "constrained bone", "parent": "root", "length": 47.13 },
+	{ "name": "normal bone", "parent": "root", "length": 53.09 }
 ],
 "slots": [
-	{ "name": "MoonShard", "bone": "bone", "attachment": "MoonShard" }
+	{ "name": "MoonShard", "bone": "constrained bone" },
+	{ "name": "IdlePath", "bone": "root", "attachment": "IdlePath" },
+	{ "name": "MoonShard2", "bone": "normal bone", "attachment": "MoonShard" }
+],
+"path": [
+	{
+		"name": "IdlePath",
+		"bones": [ "constrained bone" ],
+		"target": "IdlePath",
+		"position": 0.7011
+	}
 ],
 "skins": [
 	{
 		"name": "default",
 		"attachments": {
+			"IdlePath": {
+				"IdlePath": {
+					"type": "path",
+					"closed": true,
+					"lengths": [ 122.22, 270.51, 464.43, 661.9, 836.92 ],
+					"vertexCount": 15,
+					"vertices": [ -74.59, -45.92, -78.7, -23.08, -81.76, -6, -71.16, 73.83, -32.81, 83.55, 26.16, 98.48, 19.06, -20.54, 46.72, -29.2, 82.53, -40.41, 89.68, -131.13, -68.05, -13.53, -150.84, 48.19, -22.79, -34.56, 64.37, 18.42, -42.26, -81.46 ]
+				}
+			},
 			"MoonShard": {
-				"MoonShard": { "x": 2.06, "y": -0.18, "rotation": 131.14, "width": 46, "height": 48 }
+				"MoonShard": { "rotation": 132.98, "width": 46, "height": 48 }
+			},
+			"MoonShard2": {
+				"MoonShard": { "x": 30, "rotation": 135, "width": 46, "height": 48 }
 			}
 		}
 	}
 ],
 "animations": {
-	"Shoot": {
+	"Idle": {
 		"slots": {
 			"MoonShard": {
 				"attachment": [
-					{ "time": 0.8333, "name": "MoonShard" }
+					{ "name": "MoonShard" }
+				]
+			},
+			"MoonShard2": {
+				"attachment": [
+					{ "name": null },
+					{ "time": 2, "name": null }
 				]
 			}
 		},
-		"bones": {
-			"bone": {
-				"rotate": [
+		"path": {
+			"IdlePath": {
+				"position": [
 					{},
-					{ "time": 0.3, "angle": 179.08, "curve": "stepped" },
-					{ "time": 0.8333, "angle": 179.08 }
+					{ "time": 2, "position": 1 }
 				],
-				"translate": [
-					{ "curve": 0.108, "c2": 0.23, "c3": 0.505 },
-					{ "time": 0.8333, "x": -163.4 }
+				"spacing": [
+					{}
 				]
 			}
 		}
 	},
-	"animation": {}
+	"Landed": {
+		"bones": {
+			"normal bone": {
+				"scale": [
+					{ "curve": 0.25, "c3": 0 },
+					{ "time": 0.1667, "x": 1.028, "y": 1.023, "curve": 0.846, "c3": 0.75 },
+					{ "time": 0.3333 }
+				]
+			}
+		}
+	},
+	"Shoot": {
+		"slots": {
+			"IdlePath": {
+				"attachment": [
+					{ "name": "IdlePath" }
+				]
+			}
+		},
+		"bones": {
+			"normal bone": {
+				"translate": [
+					{ "curve": 0.145, "c2": 0.05, "c3": 0 },
+					{ "time": 0.8333, "x": -148.66 }
+				]
+			}
+		}
+	}
 }
 }

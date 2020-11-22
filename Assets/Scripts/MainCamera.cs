@@ -60,7 +60,7 @@ public class MainCamera : MonoBehaviour
     long scale = (long)detail["assetScale"];
 
     Debug.Log("MonetizationProgress amount " + amountAsLong + ", assetCode: " + assetCode + ", scale: " + scale);
-
+    
     Debug.Log("MonetizationProgress");
   }
 }
