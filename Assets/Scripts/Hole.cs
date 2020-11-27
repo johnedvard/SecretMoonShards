@@ -20,7 +20,6 @@ public class Hole : MonoBehaviour
 
   void OnTriggerEnter2D(Collider2D other) {
     if(other.gameObject.tag == "Player") {
-      Debug.Log("Destroy" + gameObject);
       if(OnFallInHole != null) OnFallInHole();
     }
   }
@@ -29,7 +28,9 @@ public class Hole : MonoBehaviour
     }
   }
   void OnTriggerStay2D(Collider2D other) {
+    Debug.Log("Stay in holew" + other.gameObject.tag);
     if(other.gameObject.tag == "Player") {
+      if(OnFallInHole != null) OnFallInHole();
     }
   }
 }

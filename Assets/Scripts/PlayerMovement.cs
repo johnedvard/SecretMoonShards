@@ -18,20 +18,29 @@ public class PlayerMovement : MonoBehaviour
   public string currentShardState = "Idle";
   public string currentPlayerState = "Idle";
   public float shotSpeed = 100f;
-  public float maxChargeTime = 3f; 
+  public float maxChargeTime = 2f;
   private float chargingTime = 1f;
   private float teleportTime = 0.1f;
   private float maxTeleportTime = 0.1f;
+  private bool canChangeCharacter = false;
   private Vector3 originalScale;
   private Vector2 mousePos;
   public GameObject[] spawnPoints;
+  public Vector3 shardVelocity;
+  public int selectedAnimatorIndex; 
+  public RuntimeAnimatorController[] animatorCtrls;
+  
   void OnEnable() {
-      Hole.OnFallInHole += FallInHole;
+    Hole.OnFallInHole += FallInHole;
+    WMBroadcaster.OnMonetizationStart += OnMonetizationStart;
+    WMBroadcaster.OnMonetizationProgress += OnMonetizationProgress;
   }
   void OnDisable() {
-      Hole.OnFallInHole -= FallInHole;
+    Hole.OnFallInHole -= FallInHole;
+    WMBroadcaster.OnMonetizationStart -= OnMonetizationStart;
+    WMBroadcaster.OnMonetizationProgress -= OnMonetizationProgress;
   }
-  
+   
   void Start() {
     originalScale = transform.localScale;
     rb = gameObject.GetComponent<Rigidbody2D>();
@@ -52,6 +61,19 @@ public class PlayerMovement : MonoBehaviour
     } else {
       ShardControls();
       ChargeShot();
+    }
+    ChangeSkinControls();
+  }
+
+  void ChangeSkinControls(){
+    if (Input.GetKeyDown("space")) {
+      if(canChangeCharacter) {
+        selectedAnimatorIndex++;
+        if(selectedAnimatorIndex >= animatorCtrls.Length) {
+          selectedAnimatorIndex = 0;
+        }
+        animator.runtimeAnimatorController = animatorCtrls[selectedAnimatorIndex];
+      }
     }
   }
 
@@ -100,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     }
   }
 
-  void FixedUpdate() 
+  void FixedUpdate()
   {
     if(currentPlayerState.Equals("Falling")) return;
     rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
@@ -110,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
       float angle = Mathf.Atan2(lookDir.y,lookDir.x) * Mathf.Rad2Deg;
       shardRB.rotation = angle;
     }
+    shardVelocity = shardRB.velocity;
   }
   
   private void ShardControls(){
@@ -128,8 +151,26 @@ public class PlayerMovement : MonoBehaviour
 
   private void TeleportPlayer(){
     SetPlayerState("Teleport");
+    Vector3 teleportStartPos = rb.position;
     rb.position = shardRB.position;
     teleportTime = 0f;
+    CheckIfTeleportedThroughSomething(teleportStartPos, shardRB.position);
+  }
+  void CheckIfTeleportedThroughSomething(Vector3 startPos, Vector3 endPos){
+    Debug.Log(LayerMask.NameToLayer("Enemy"));
+    int layerMask = 1 << LayerMask.NameToLayer("Enemy");
+    RaycastHit2D hit = Physics2D.CircleCast(startPos, 10, endPos-startPos, Vector3.Distance(endPos, startPos),layerMask );
+    
+    if (hit.transform != null) {
+      GameObject hitObject = hit.transform.gameObject;
+      Killable killable = hitObject.GetComponent<Killable>();
+      Debug.Log("hit object" + hitObject);
+      if(killable && killable.IsKillable()){
+        killable.Kill();
+      }
+    } else {
+      Debug.Log("Nothing was hit");
+    }
   }
 
   private void SetShardAnimation(AnimationReferenceAsset animation, bool loop, float timeScale) {
@@ -137,20 +178,20 @@ public class PlayerMovement : MonoBehaviour
   }
 
   private void SetPlayerState(string state){
+    trail.emitting = false;
     if(!state.Equals(currentPlayerState)) {
       currentPlayerState = state;
     }
     if(state.Equals("Walking") || state.Equals("Idle")) {
-      trail.emitting = false;
     }else if(state.Equals("Teleport")) {
       trail.emitting = true;
     }else if(state.Equals("TeleportEnd")) {
-      trail.emitting = false;
       teleportTime = maxTeleportTime;
     }
   }
 
   private void SetShardState(string state) {
+    TrailRenderer shardTrail = shardGameObject.GetComponent<TrailRenderer>();
     if(!state.Equals(currentShardState)) {
       currentShardState = state;
     }
@@ -189,4 +230,14 @@ public class PlayerMovement : MonoBehaviour
     SetPlayerState("Falling");
   }
 
+  void OnMonetizationStart(Dictionary<string, object> detail)
+  {
+    Debug.Log("MonetizationProgres in player");
+  }
+
+  void OnMonetizationProgress(Dictionary<string, object> detail)
+  {
+    Debug.Log("MonetizationProgres in player");
+    canChangeCharacter = true;
+  }
 }

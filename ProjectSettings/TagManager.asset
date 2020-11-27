@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Shard
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Player
   - Shard
   - Holes
-  - 
+  - Enemy
   - 
   - 
   - 

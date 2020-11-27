@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 67e521d776afd4f12b49dac19f05a627
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2697552620850590639
+    second: HEROS1bit_Dog Walk U_0
+  - first:
+      213: 4849388355201435084
+    second: HEROS1bit_Dog Walk U_1
+  - first:
+      213: 182063183014858166
+    second: HEROS1bit_Dog Walk U_2
+  - first:
+      213: 2439033413121096399
+    second: HEROS1bit_Dog Walk U_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,7 +109,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: HEROS1bit_Dog Walk U_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa339b001d1af6520800000000000000
+      internalID: 2697552620850590639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HEROS1bit_Dog Walk U_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc582b1140d7c4340800000000000000
+      internalID: 4849388355201435084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HEROS1bit_Dog Walk U_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bd07461081d68200800000000000000
+      internalID: 182063183014858166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HEROS1bit_Dog Walk U_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fca346877ff29d120800000000000000
+      internalID: 2439033413121096399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
