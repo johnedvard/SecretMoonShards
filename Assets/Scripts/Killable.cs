@@ -7,11 +7,9 @@ public class Killable : MonoBehaviour
     // Start is called before the first frame update
     public ParticleSystem ps;
     public delegate void EnemyKilledAction(); 
-    public static event EnemyKilledAction OnEnemyKilled; 
+    public static event EnemyKilledAction OnEnemyKilled;
     void Start()
     {
-        
-        
     }
 
     // Update is called once per frame
@@ -25,8 +23,6 @@ public class Killable : MonoBehaviour
     }
 
     public void Kill(){
-      Debug.Log("Kill");
-
       var spawnedPs = Instantiate(ps, transform.position, transform.rotation);
       if(OnEnemyKilled != null) OnEnemyKilled();
       Destroy(gameObject);

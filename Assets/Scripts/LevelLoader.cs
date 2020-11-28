@@ -10,6 +10,10 @@ public class LevelLoader : MonoBehaviour
   public Animator transition;
   public float transitionTime = 1f;
 
+  void Update(){
+    GameControls();
+  }
+
   void OnEnable() {
       Goal.OnGoal += ReachedGoal;
   }
@@ -18,8 +22,13 @@ public class LevelLoader : MonoBehaviour
   }
 
   public void LoadNextLevel(){
-    Debug.Log("start courutine");
     StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+  }
+
+  void GameControls(){
+    if (Input.GetKeyDown("r")){
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
   }
 
   IEnumerator LoadLevel(int levelIndex) {
@@ -30,7 +39,6 @@ public class LevelLoader : MonoBehaviour
   }
 
   public void ReachedGoal() {
-    Debug.Log("Load next lvl plz");
     LoadNextLevel();
   }
 }

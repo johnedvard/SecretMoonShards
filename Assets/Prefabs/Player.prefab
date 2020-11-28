@@ -136,6 +136,7 @@ MonoBehaviour:
   shardVelocity: {x: 0, y: 0, z: 0}
   selectedAnimatorIndex: 0
   animatorCtrls: []
+  shootClip: {fileID: 8300000, guid: bb4cdf38077fa475c9235055ad9a643e, type: 3}
 --- !u!95 &9099252134417148722
 Animator:
   serializedVersion: 3

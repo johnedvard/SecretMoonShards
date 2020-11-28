@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
+  public AudioClip killClip;
+  AudioSource audioSource;
   // Start is called before the first frame update
   void Start()
   {
-
+    audioSource = GetComponent<AudioSource>();
   }
 
   // Update is called once per frame
   void Update()
   {
-
   }
 
   void OnEnable()
   {
     WMBroadcaster.OnMonetizationStart += OnMonetizationStart;
     WMBroadcaster.OnMonetizationProgress += OnMonetizationProgress;
+    Killable.OnEnemyKilled += EnemyKilled;
   }
 
   // unregister events that you've registered
@@ -28,6 +30,7 @@ public class MainCamera : MonoBehaviour
   {
     WMBroadcaster.OnMonetizationStart -= OnMonetizationStart;
     WMBroadcaster.OnMonetizationProgress -= OnMonetizationProgress;
+    Killable.OnEnemyKilled -= EnemyKilled;
   }
 
   // A monetization start event should occur roughly after a second or two after your game loads as WebGL.
@@ -41,10 +44,6 @@ public class MainCamera : MonoBehaviour
     string id = detail["id"] as string;
     string resolvedEndpoint = detail["resolvedEndpoint"] as string;
     string metaContent = detail["metaContent"] as string;
-
-    Debug.Log("MonetizationStart requestId: " + requestId + ", id: " + id + ", resolvedEndpoint: " + resolvedEndpoint + ", metaContent" + metaContent);
-
-    Debug.Log("MonetizationStart");
   }
 
   // A monetization progress event should occur roughly every two seconds after the monetization progress occurs
@@ -58,9 +57,9 @@ public class MainCamera : MonoBehaviour
     long amountAsLong = Convert.ToInt64(amount);
     string assetCode = detail["assetCode"] as string;
     long scale = (long)detail["assetScale"];
+  }
 
-    Debug.Log("MonetizationProgress amount " + amountAsLong + ", assetCode: " + assetCode + ", scale: " + scale);
-    
-    Debug.Log("MonetizationProgress");
+  public void EnemyKilled(){
+    audioSource.PlayOneShot(killClip, 1f);
   }
 }

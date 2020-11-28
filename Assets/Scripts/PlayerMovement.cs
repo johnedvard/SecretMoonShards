@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
       Debug.Log("hit object" + hitObject);
       if(killable && killable.IsKillable()){
         killable.Kill();
+        CheckIfTeleportedThroughSomething(hit.transform.position, endPos);
       }
     } else {
       Debug.Log("Nothing was hit");
